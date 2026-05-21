@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.env
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+repograph_cache/
+/tmp/repograph_cache/
+*.json.bak
+.DS_Store
