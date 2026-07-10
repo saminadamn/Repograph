@@ -114,7 +114,7 @@ class RepoGraphBuilder:
                 size = fpath.stat().st_size
                 if size > self.max_file_size_kb * 1024:
                     continue  # Skip huge files
-                rel_path = str(fpath.relative_to(self.repo_path))
+                rel_path = fpath.relative_to(self.repo_path).as_posix()
                 lang = self.SUPPORTED_EXTENSIONS[ext]
                 node = self._parse_file(fpath, rel_path, lang, size)
                 if node:
@@ -203,7 +203,7 @@ class RepoGraphBuilder:
         path_index = set(self.nodes.keys())
         
         for src_path, node in self.nodes.items():
-            src_dir = str(Path(src_path).parent)
+            src_dir = Path(src_path).parent.as_posix()
             
             for imp in node.imports:
                 target = self._resolve_import(imp, src_dir, path_index)

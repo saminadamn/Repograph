@@ -14,6 +14,10 @@ from pathlib import Path
 import tempfile
 import hashlib
 
+# Ensure emoji output doesn't crash on non-UTF-8 terminals (e.g. Windows cp1252)
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent))
 

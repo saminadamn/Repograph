@@ -160,6 +160,31 @@ python -m pytest tests/ -v
 
 ---
 
+## Deployment
+
+The backend and frontend deploy separately — the backend needs a real Python process (it shells out to `git clone`), the frontend is a single static file.
+
+### Backend → Render
+
+1. Push this repo to GitHub and create a new **Blueprint** on [Render](https://render.com), pointing it at the repo. `render.yaml` at the repo root configures the service automatically (Python 3.11.9, `uvicorn src.api.main:app`).
+2. Once deployed, note the service URL, e.g. `https://repograph-api.onrender.com`.
+
+Render's free tier spins down when idle, so the first request after inactivity takes ~30–50s to cold-start.
+
+### Frontend → Vercel / Netlify / GitHub Pages
+
+The frontend is just `frontend/index.html` — no build step. Deploy it with any static host, setting the project root/publish directory to `frontend`.
+
+Point it at your deployed backend by visiting it once with `?api=`:
+
+```
+https://your-frontend.vercel.app/?api=https://repograph-api.onrender.com
+```
+
+This is saved to `localStorage`, so it only needs to be set once per browser. Without it, the frontend defaults to `http://localhost:8000` for local development.
+
+---
+
 ## API Reference
 
 ### `POST /analyze`

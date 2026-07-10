@@ -9,6 +9,7 @@ import subprocess
 import tempfile
 import shutil
 from pathlib import Path
+from typing import Optional
 from urllib.parse import urlparse
 
 
@@ -92,7 +93,3 @@ class GitHubFetcher:
 
     def __exit__(self, *args):
         self.cleanup()
-
-
-# Allow Optional import
-from typing import Optional
