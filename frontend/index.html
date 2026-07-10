@@ -297,10 +297,13 @@
 </div>
 
 <script>
-// Set once via ?api=https://your-backend.onrender.com — persisted in localStorage after that.
+// Defaults to the deployed backend; falls back to a local dev server when run from localhost.
+// Override anytime via ?api=https://your-backend — persisted in localStorage after that.
+const isLocalHost = ['localhost', '127.0.0.1'].includes(location.hostname);
+const DEFAULT_API = isLocalHost ? 'http://localhost:8000' : 'https://repograph-api-1bl6.onrender.com';
 const apiParam = new URLSearchParams(location.search).get('api');
 if (apiParam) localStorage.setItem('repograph_api', apiParam);
-const API = localStorage.getItem('repograph_api') || 'http://localhost:8000';
+const API = localStorage.getItem('repograph_api') || DEFAULT_API;
 document.getElementById('statusBar').textContent = `READY — API: ${API}`;
 let graphData = null;
 let graphId = null;
