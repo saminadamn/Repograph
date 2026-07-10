@@ -94,7 +94,7 @@ repograph/
 
 ---
 
-## Concepts Implemented (Interviewer Checklist)
+## Concepts Implemented 
 
 | Concept | Where | Why It Matters |
 |---|---|---|
